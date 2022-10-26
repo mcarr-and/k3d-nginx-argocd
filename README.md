@@ -54,7 +54,7 @@ curl -v -k http://argocd.localhost:8070 -H "host: argocd.localhost:8070" --resol
 
 ### Browser test.
 
-http://argocd.localhost:8070?
+[http://argocd.localhost:8070?](http://argocd.localhost:8070?)
 
 ####  URL and the need for the **?** on the end of the url
 
