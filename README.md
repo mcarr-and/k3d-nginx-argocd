@@ -41,6 +41,28 @@ This ingress is for HTTP only.
 
 No HTTPS configuration
 
+#### Configuration starting point. 
+
+https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multiple-ingress-objects-and-hosts 
+
+
+**Configuration Changes** 
+
+Do not redirect for SSL
+
+```yaml
+nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+```
+
+Comment out the TLS as Nginx was not respecting this secret
+
+```yaml
+#tls:
+#  - hosts:
+#    - argocd.example.com
+#    secretName: argocd-secret # do not change, this is provided by Argo CD
+```    
+
 
 # Test to see if Argocd is running
 
