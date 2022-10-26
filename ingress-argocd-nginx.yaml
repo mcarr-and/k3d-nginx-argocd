@@ -4,7 +4,7 @@ metadata:
   name: argocd-server-http-ingress
   namespace: argocd
   annotations:
-    nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
     nginx.ingress.kubernetes.io/use-port-in-redirects: "true"
 spec:
@@ -20,10 +20,10 @@ spec:
                 port:
                   name: http
       host: argocd.local
-  # tls: # removing https configruation as could not get this to work
-  #   - hosts:
-  #       - argocd.local
-  #     secretName: argocd-secret # do not change, this is provided by Argo CD
+  tls:
+    - hosts:
+        - argocd.example.com
+      secretName: argocd-secret # do not change, this is provided by Argo CD
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -46,7 +46,7 @@ spec:
                 port:
                   name: http
       host: grpc.argocd.local
-  # tls:
-  #   - hosts:
-  #       - grpc.argocd.local
-  #     secretName: argocd-secret # do not change, this is provided by Argo CD
+  tls:
+    - hosts:
+        - grpc.argocd.local
+      secretName: argocd-secret # do not change, this is provided by Argo CD

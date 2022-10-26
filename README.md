@@ -1,6 +1,8 @@
+Running Argocd in a K3D Kubernetes Cluster with Nginx as the router
 
 
-## /etc/hosts
+
+## /etc/hosts changes
 
 add the `argocd.local` entry so you have a url to hit inside the K3D cluster. 
 
@@ -21,22 +23,8 @@ add the `argocd.local` entry so you have a url to hit inside the K3D cluster.
 
 # Install Cluster and Tools
 
-### 1. Install D3d and disable the internal Traefik that is used by defalt
-
 ```bash
-./scripts/cluster-create.sh
-```
-
-### 2. Install Argocd with insecure configuration to allow HTTP
-
-```bash
-./scripts/install-argocd-insecure.sh
-```
-
-### 3. Install Nginx
-
-```bash
-./scripts/install-nginx.sh
+./install.sh
 ```
 
 **Note**
@@ -57,15 +45,6 @@ https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multi
 nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 ```
 
-2. Comment out the TLS as Nginx was not respecting this secret
-
-```yaml
-#tls:
-#  - hosts:
-#    - argocd.example.com
-#    secretName: argocd-secret # do not change, this is provided by Argo CD
-```    
-
 # Test to see if Argocd is running
 
 
@@ -82,11 +61,21 @@ curl -v -k http://argocd.local:8070 -H "host: argocd.local:8070" --resolve argoc
 
 ## Browser test.
 
-http://argocd.local:8070
+**?** is an important part of the URL. If you do not have a **?** on your URL Chrome 
+
+
+[http://argocd.local:8070?](http://argocd.local:8070?)
 
 This should forard you onto 
 
-http://argocd.local:8070/login?
+[http://argocd.local:8070/login?](http://argocd.local:8070/login?)
+
+
+### Get Argocd Admin Password
+
+```bash
+./scripts/argocd-show-password.sh
+```
 
 
 # tear down cluster
