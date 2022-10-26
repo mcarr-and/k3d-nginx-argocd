@@ -63,7 +63,7 @@ curl -v -k http://argocd.local:8070 -H "host: argocd.local:8070" --resolve argoc
 
 ## Browser test.
 
-**?** is an important part of the URL. If you do not have a **?** on your URL Chrome 
+**?** is an important part of the URL. If you do not have a **?** on your URL Chrome will forward without the port number attached.
 
 
 [http://argocd.local:8070?](http://argocd.local:8070?)
