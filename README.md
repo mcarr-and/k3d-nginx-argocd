@@ -1,6 +1,8 @@
 Running Argocd in a K3D Kubernetes Cluster with Nginx as the router
 
-
+Installs:
+* Nginx (namespace: kube-system)
+* ArgoCD (namespace: argocd)
 
 ## /etc/hosts changes
 
