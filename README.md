@@ -14,6 +14,9 @@
     ```http://argocd.localhost:8080/```
 
 ## /etc/hosts
+
+add the `argocd.local` entry so you have a url to hit inside the K3D cluster. 
+
 ```
 ##
 # Host Database
@@ -22,7 +25,7 @@
 # when the system is booting.  Do not change this entry.
 ##
 255.255.255.255	broadcasthost
-127.0.0.1	localhost argocd.localhost
+127.0.0.1	localhost argocd.local
 
 ::1             localhost
 
@@ -76,13 +79,12 @@ nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 #    secretName: argocd-secret # do not change, this is provided by Argo CD
 ```    
 
-
 # Test to see if Argocd is running
 
 
 ## Curl command 
 ```bash
-curl -v -k http://argocd.localhost:8070 -H "host: argocd.localhost:8070" --resolve argocd.localhost:8070:127.0.0.1
+curl -v -k http://argocd.local:8070 -H "host: argocd.local:8070" --resolve argocd.local:8070:127.0.0.1
 ```
 
 ### Curl expected output
@@ -93,46 +95,11 @@ curl -v -k http://argocd.localhost:8070 -H "host: argocd.localhost:8070" --resol
 
 ## Browser test.
 
-[http://argocd.localhost:8070?](http://argocd.localhost:8070?)
+http://argocd.local:8070
 
-**NOTE: URL and the need for the *?* on the end of the url**
+This should forard you onto 
 
-Should forward you to : 
-
-[http://argocd.localhost:8070/login?](http://argocd.localhost:8070/login?)
-
-
-## Chrome HTTPS forward Issue 
-
-### Versions used in test
-* Chrome version 
-    * 107.0.5304.62 
-* Nginx 
-    * 1.23.2
-* K3D 
-  * 5.4.6
-
-
-There is a bug in Chrome Mac where: 
-
-[http://argocd.localhost:8070?](http://argocd.localhost:8070?)
-
-Will forward you to: 
-
-https://argocd.localhost 
-
-
-**Mac Chrome URL Problems**
-1. stripping off the port number on the URL
-1. Forwards to **https** even when asking for http
-
-
-### Browsers that do work with this setup
-
- * Safari 
-    * 16.0 
-
-Does not forward to https by default. 
+http://argocd.local:8070/login?
 
 
 # tear down cluster
