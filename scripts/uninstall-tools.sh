@@ -1,3 +1,3 @@
 ./scripts/uninstall-argocd.sh
 
-./scripts/uninstall-nginx.sh
+./scripts/uninstall-router.sh
