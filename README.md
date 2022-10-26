@@ -2,7 +2,17 @@
 
 ## /etc/hosts
 ```
-127.0.0.1	localhost argocd.localhost 
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+255.255.255.255	broadcasthost
+127.0.0.1	localhost argocd.localhost
+
+::1             localhost
+
 ```
 
 
