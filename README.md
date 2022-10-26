@@ -48,13 +48,13 @@ https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multi
 
 **Configuration Changes** 
 
-Do not redirect for SSL
+1. Do not redirect for SSL
 
 ```yaml
 nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
 ```
 
-Comment out the TLS as Nginx was not respecting this secret
+2. Comment out the TLS as Nginx was not respecting this secret
 
 ```yaml
 #tls:
