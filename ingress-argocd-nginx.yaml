@@ -19,10 +19,10 @@ spec:
                 name: argocd-server
                 port:
                   name: http
-      host: argocd.localhost
+      host: argocd.local
   # tls: # removing https configruation as could not get this to work
   #   - hosts:
-  #       - argocd.localhost
+  #       - argocd.local
   #     secretName: argocd-secret # do not change, this is provided by Argo CD
 ---
 apiVersion: networking.k8s.io/v1
@@ -45,8 +45,8 @@ spec:
                 name: argocd-server
                 port:
                   name: http
-      host: grpc.argocd.localhost
+      host: grpc.argocd.local
   # tls:
   #   - hosts:
-  #       - grpc.argocd.localhost
+  #       - grpc.argocd.local
   #     secretName: argocd-secret # do not change, this is provided by Argo CD
