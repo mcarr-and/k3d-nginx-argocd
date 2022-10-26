@@ -26,7 +26,7 @@ add the `argocd.local` entry so you have a url to hit inside the K3D cluster.
 # Install Cluster and Tools
 
 ```bash
-./install-all.sh
+./install.sh
 ```
 
 **Note**
