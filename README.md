@@ -38,15 +38,6 @@ No HTTPS configuration
 
 https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multiple-ingress-objects-and-hosts 
 
-
-**Configuration Changes** 
-
-1. Do not redirect for SSL
-
-```yaml
-nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-```
-
 # Test to see if Argocd is running
 
 
