@@ -38,3 +38,8 @@ Add the `argocd.localhost` entry so you have a url to hit inside the K3D cluster
 ## 4. Visit argo
 
 [http://argocd.local:8070?](http://argocd.local:8070?)
+
+
+### (Optional) Visit Kubernetes Dashboard
+
+[http://k-dashboard.local8070?](http://k-dashboard.local8070?)
