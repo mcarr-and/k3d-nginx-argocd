@@ -1,0 +1,68 @@
+---
+apiVersion: skaffold/v2beta29
+kind: Config
+metadata:
+  name: dashboard
+deploy:
+  helm:
+    releases:
+      - name: kubernetes-dashboard
+        remoteChart: kubernetes-dashboard
+        repo: https://kubernetes.github.io/dashboard/
+        namespace: kubernetes-dashboard
+        createNamespace: true
+        valuesFiles: ["./values/local/dashboard.values.yaml"]
+portForward:
+  - resourceType: service
+    resourceName: kubernetes-dashboard
+    namespace: kubernetes-dashboard
+    port: 443
+    localPort: 4505
+---
+apiVersion: skaffold/v2beta22
+kind: Config
+metadata:
+  name: ingress-nginx
+profiles:
+  - name: local
+    activation:
+      - kubeContext: k3d-k3s-default
+    deploy:
+      helm:
+        releases:
+          - name: ingress-nginx
+            remoteChart: ingress-nginx
+            repo: https://kubernetes.github.io/ingress-nginx
+            namespace: ingress-nginx
+            createNamespace: true
+portForward:
+  - namespace: ingress-nginx
+    resourceName: ingress-nginx-controller
+    resourceType: service
+    port: 80
+    localPort: 8080
+---
+apiVersion: skaffold/v2beta22
+kind: Config
+metadata:
+  name: argo-cd
+requires:
+  - configs: ["nginx-ingress"]
+profiles:
+  - name: local
+    activation:
+      - kubeContext: k3d-k3s-default
+    deploy:
+      helm:
+        releases:
+          - name: argo-cd
+            remoteChart: argo-cd
+            repo: https://argoproj.github.io/argo-helm
+            namespace: argocd
+            createNamespace: true
+            valuesFiles: [values/local/argo-cd.values.yaml]
+        hooks:
+          after:
+            - host:
+                os: [darwin, linux]
+                command: ["sh", "-c", "kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath='{.data.password}' | base64 -d"]

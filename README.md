@@ -1,10 +1,19 @@
-Running Argocd in a K3D Kubernetes Cluster with Nginx as the router
+# Quickstart
 
-Installs:
-* Nginx (namespace: kube-system)
-* ArgoCD (namespace: argocd)
+1) Create Cluster
+    ```bash
+    make cluster
+    ```
 
-## /etc/hosts changes
+2) Deploy nginx, argo and dashbaord
+    ```bash
+    make run
+    ``` 
+
+3) vist argo
+    ```http://argocd.localhost:8080/```
+
+## /etc/hosts
 
 add the `argocd.local` entry so you have a url to hit inside the K3D cluster. 
 
@@ -16,63 +25,6 @@ add the `argocd.local` entry so you have a url to hit inside the K3D cluster.
 # when the system is booting.  Do not change this entry.
 ##
 255.255.255.255	broadcasthost
-127.0.0.1	localhost argocd.local
+127.0.0.1	localhost argocd.localhost
 
 ::1             localhost
-
-```
-
-
-# Install Cluster and Tools
-
-```bash
-./install.sh
-```
-
-**Note**
-This ingress is for HTTP only. 
-
-No HTTPS configuration
-
-#### Configuration starting point. 
-
-https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/#option-2-multiple-ingress-objects-and-hosts 
-
-# Test to see if Argocd is running
-
-
-## Curl command 
-```bash
-curl -v -k http://argocd.local:8070 -H "host: argocd.local:8070" --resolve argocd.local:8070:127.0.0.1
-```
-
-### Curl expected output
-```
-<!doctype html><html lang="en"><head><meta charset="UTF-8"><title>Argo CD</title>
-......
-```
-
-## Browser test.
-
-**?** is an important part of the URL. If you do not have a **?** on your URL Chrome will forward without the port number attached.
-
-
-[http://argocd.local:8070?](http://argocd.local:8070?)
-
-This should forard you onto 
-
-[http://argocd.local:8070/login?](http://argocd.local:8070/login?)
-
-
-### Get Argocd Admin Password
-
-```bash
-./scripts/argocd-show-password.sh
-```
-
-
-# tear down cluster
-
-```bash
-./scripts/cluster-delete.sh
-```
