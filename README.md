@@ -12,7 +12,7 @@ Add the `argocd.localhost` entry so you have a url to hit inside the K3D cluster
 # when the system is booting.  Do not change this entry.
 ##
 255.255.255.255	broadcasthost
-127.0.0.1	localhost argocd.localhost
+127.0.0.1	localhost argocd.local
 
 ::1             localhost
 ```
@@ -29,11 +29,12 @@ Add the `argocd.localhost` entry so you have a url to hit inside the K3D cluster
     make run
     ``` 
 
-## 3. Visit argo
+## 3. Verify argocd is expsed via curl
 
-http://argocd.localhost:8080/
+```bash
+ curl -v -k http://argocd.local:8070 -H "host: argocd.local:8070" --resolve argocd.local:8070:127.0.0.1
+ ```
 
+## 4. Visit argo
 
-### (Optional) Visit Kubernetes Dashboard
-
-http://localhost:4505/
+[http://argocd.local:8070?](http://argocd.local:8070?)

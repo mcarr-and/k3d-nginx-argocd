@@ -8,7 +8,7 @@ delete:
 
 .PHONY: dev
 dev:
-	skaffold dev -p local  --port-forward
+	skaffold dev -p local
 
 .PHONY: run
 run:

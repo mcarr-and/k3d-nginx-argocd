@@ -44,7 +44,7 @@ crds:
 global:
   # -- Common labels for the all resources
   additionalLabels: {}
-    # app: argo-cd
+  # app: argo-cd
 
   # Default image used by all components
   image:
@@ -165,7 +165,7 @@ configs:
 
     ## Generic parameters
     # -- Open-Telemetry collector address: (e.g. "otel-collector:4317")
-    otlp.address: ''
+    otlp.address: ""
 
     ## Controller Properties
     # -- Number of application status processors
@@ -183,7 +183,7 @@ configs:
     # -- Value for base href in index.html. Used if Argo CD is running behind reverse proxy under subpath different from /
     server.basehref: /
     # -- Used if Argo CD is running behind reverse proxy under subpath different from /
-    server.rootpath: ''
+    server.rootpath: ""
     # -- Directory path that contains additional static assets
     server.staticassets: /shared/app
     # -- Disable Argo CD RBAC for user authentication
@@ -210,11 +210,11 @@ configs:
 
     # -- The name of the default role which Argo CD will falls back to, when authorizing API requests (optional).
     # If omitted or empty, users may be still be able to login, but will see no apps, projects, etc...
-    policy.default: ''
+    policy.default: ""
 
     # -- File containing user-defined policies and role definitions.
     # @default -- `''` (See [values.yaml])
-    policy.csv: ''
+    policy.csv: ""
     # Policy rules are in the form:
     #  p, subject, resource, action, object, effect
     # Role definitions and bindings are in the form:
@@ -236,7 +236,8 @@ configs:
   ## Ref:
   ## - https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#clusters
   ## - https://argo-cd.readthedocs.io/en/stable/operator-manual/security/#external-cluster-credentials
-  clusterCredentials: []
+  clusterCredentials:
+    []
     # - name: mycluster
     #   server: https://mycluster.com
     #   labels: {}
@@ -262,7 +263,8 @@ configs:
   gpgKeysAnnotations: {}
   # -- [GnuPG](https://argo-cd.readthedocs.io/en/stable/user-guide/gpg-verification/) keys to add to the key ring
   # @default -- `{}` (See [values.yaml])
-  gpgKeys: {}
+  gpgKeys:
+    {}
     # 4AEE18F83AFDEB23: |
     #     -----BEGIN PGP PUBLIC KEY BLOCK-----
     #
@@ -343,7 +345,8 @@ configs:
 
   # -- Repository credentials to be used as Templates for other repos
   ## Creates a secret for each key/value specified below to create repository credentials
-  credentialTemplates: {}
+  credentialTemplates:
+    {}
     # github-enterprise-creds-1:
     #   url: https://github.com/argoproj
     #   githubAppID: 1
@@ -370,7 +373,8 @@ configs:
   # -- Repositories list to be used by applications
   ## Creates a secret for each key/value specified below to create repositories
   ## Note: the last example in the list would use a repository credential template, configured under "configs.repositoryCredentials".
-  repositories: {}
+  repositories:
+    {}
     # istio-helm-repo:
     #   url: https://storage.googleapis.com/istio-prerelease/daily-build/master-latest-daily/charts
     #   name: istio.io
@@ -445,7 +449,8 @@ configs:
   #  }
 
 # -- Array of extra K8s manifests to deploy
-extraObjects: []
+extraObjects:
+  []
   # - apiVersion: secrets-store.csi.x-k8s.io/v1
   #   kind: SecretProviderClass
   #   metadata:
@@ -669,7 +674,8 @@ controller:
       # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
       metricRelabelings: []
       # -- Prometheus ServiceMonitor selector
-      selector: {}
+      selector:
+        {}
         # prometheus: kube-prometheus
 
       # -- Prometheus ServiceMonitor scheme
@@ -781,7 +787,8 @@ dex:
       # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
       metricRelabelings: []
       # -- Prometheus ServiceMonitor selector
-      selector: {}
+      selector:
+        {}
         # prometheus: kube-prometheus
 
       # -- Prometheus ServiceMonitor scheme
@@ -1125,7 +1132,8 @@ redis:
     # -- Port to use for redis-exporter sidecar
     containerPort: 9121
     # -- Resource limits and requests for redis-exporter sidecar
-    resources: {}
+    resources:
+      {}
       # limits:
       #   cpu: 50m
       #   memory: 64Mi
@@ -1155,7 +1163,8 @@ redis:
       # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
       metricRelabelings: []
       # -- Prometheus ServiceMonitor selector
-      selector: {}
+      selector:
+        {}
         # prometheus: kube-prometheus
 
       # -- Prometheus ServiceMonitor scheme
@@ -1168,7 +1177,6 @@ redis:
       additionalLabels: {}
       # -- Prometheus ServiceMonitor annotations
       annotations: {}
-
 
 # This key configures Redis-HA subchart and when enabled (redis-ha.enabled=true)
 # the custom redis deployment is omitted
@@ -1253,7 +1261,8 @@ server:
     targetMemoryUtilizationPercentage: 50
     # -- Configures the scaling behavior of the target in both Up and Down directions.
     # This is only available on HPA apiVersion `autoscaling/v2beta2` and newer
-    behavior: {}
+    behavior:
+      {}
       # scaleDown:
       #  stabilizationWindowSeconds: 300
       #  policies:
@@ -1489,7 +1498,8 @@ server:
       # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
       metricRelabelings: []
       # -- Prometheus ServiceMonitor selector
-      selector: {}
+      selector:
+        {}
         # prometheus: kube-prometheus
 
       # -- Prometheus ServiceMonitor scheme
@@ -1497,7 +1507,7 @@ server:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: ""  # monitoring
+      namespace: "" # monitoring
       # -- Prometheus ServiceMonitor labels
       additionalLabels: {}
       # -- Prometheus ServiceMonitor annotations
@@ -1519,10 +1529,10 @@ server:
     # -- Enable an ingress resource for the Argo CD server
     enabled: true
     # -- Additional ingress annotations
-    annotations: 
-        nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
-        nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
-        nginx.ingress.kubernetes.io/use-port-in-redirects: "true"
+    annotations:
+      nginx.ingress.kubernetes.io/force-ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+      nginx.ingress.kubernetes.io/use-port-in-redirects: "true"
     # -- Additional ingress labels
     labels: {}
     # -- Defines which ingress controller will implement the resource
@@ -1533,7 +1543,7 @@ server:
     ## Hostnames must be provided if Ingress is enabled.
     ## Secrets must be manually created in the namespace
     hosts:
-      ["argocd.localhost"]
+      ["argocd.local"]
       # - argocd.example.com
 
     # -- List of ingress paths
@@ -1571,15 +1581,17 @@ server:
   # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/ingress/
   ingressGrpc:
     # -- Enable an ingress resource for the Argo CD server for dedicated [gRPC-ingress]
-    enabled: false
+    enabled: true
     # -- Setup up gRPC ingress to work with an AWS ALB
     isAWSALB: false
     # -- Additional ingress annotations for dedicated [gRPC-ingress]
-    annotations: {}
+    annotations:
+      nginx.ingress.kubernetes.io/backend-protocol: "GRPC"
+      nginx.ingress.kubernetes.io/use-port-in-redirects: "true"
     # -- Additional ingress labels for dedicated [gRPC-ingress]
     labels: {}
     # -- Defines which ingress controller will implement the resource [gRPC-ingress]
-    ingressClassName: ""
+    ingressClassName: "nginx"
 
     awsALB:
       # -- Service type for the AWS ALB gRPC service
@@ -1599,7 +1611,7 @@ server:
     ## Secrets must be manually created in the namespace
     ##
     hosts:
-      []
+      ["grpc.argocd.local"]
       # - argocd.example.com
 
     # -- List of ingress paths for dedicated [gRPC-ingress]
@@ -1673,7 +1685,7 @@ server:
     enabled: false
     # -- Domains for the Google Managed Certificate
     domains:
-    - argocd.example.com
+      - argocd.example.com
 
   ## Create a Google FrontendConfig Custom Resource, for use with the GKE Ingress Controller
   ## https://cloud.google.com/kubernetes-engine/docs/how-to/ingress-features#configuring_ingress_features_through_frontendconfig_parameters
@@ -1777,7 +1789,8 @@ repoServer:
     targetMemoryUtilizationPercentage: 50
     # -- Configures the scaling behavior of the target in both Up and Down directions.
     # This is only available on HPA apiVersion `autoscaling/v2beta2` and newer
-    behavior: {}
+    behavior:
+      {}
       # scaleDown:
       #  stabilizationWindowSeconds: 300
       #  policies:
@@ -1959,7 +1972,8 @@ repoServer:
       # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
       metricRelabelings: []
       # -- Prometheus ServiceMonitor selector
-      selector: {}
+      selector:
+        {}
         # prometheus: kube-prometheus
 
       # -- Prometheus ServiceMonitor scheme
@@ -2121,7 +2135,8 @@ applicationSet:
       # -- Prometheus [MetricRelabelConfigs] to apply to samples before ingestion
       metricRelabelings: []
       # -- Prometheus ServiceMonitor selector
-      selector: {}
+      selector:
+        {}
         # prometheus: kube-prometheus
 
       # -- Prometheus ServiceMonitor scheme
@@ -2129,7 +2144,7 @@ applicationSet:
       # -- Prometheus ServiceMonitor tlsConfig
       tlsConfig: {}
       # -- Prometheus ServiceMonitor namespace
-      namespace: ""  # monitoring
+      namespace: "" # monitoring
       # -- Prometheus ServiceMonitor labels
       additionalLabels: {}
       # -- Prometheus ServiceMonitor annotations
@@ -2164,11 +2179,13 @@ applicationSet:
   podLabels: {}
 
   # -- Pod Security Context
-  podSecurityContext: {}
+  podSecurityContext:
+    {}
     # fsGroup: 2000
 
   # -- Security Context
-  securityContext: {}
+  securityContext:
+    {}
     # capabilities:
     #   drop:
     #   - ALL
@@ -2177,7 +2194,8 @@ applicationSet:
     # runAsUser: 1000
 
   # -- Resource limits and requests for the controller pods.
-  resources: {}
+  resources:
+    {}
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
     # resources, such as Minikube. If you do want to specify resources, uncomment the following
@@ -2202,12 +2220,14 @@ applicationSet:
   priorityClassName: ""
 
   # -- List of extra mounts to add (normally used with extraVolumes)
-  extraVolumeMounts: []
+  extraVolumeMounts:
+    []
     # - mountPath: /tmp/foobar
     #   name: foobar
 
   # -- List of extra volumes to add
-  extraVolumes: []
+  extraVolumes:
+    []
     # - name: foobar
     #   emptyDir: {}
 
@@ -2215,13 +2235,15 @@ applicationSet:
   extraArgs: []
 
   # -- Environment variables to pass to the controller
-  extraEnv: []
+  extraEnv:
+    []
     # - name: "MY_VAR"
     #   value: "value"
 
   # -- envFrom to pass to the controller
   # @default -- `[]` (See [values.yaml])
-  extraEnvFrom: []
+  extraEnvFrom:
+    []
     # - configMapRef:
     #     name: config-map-name
     # - secretRef:
@@ -2243,7 +2265,8 @@ applicationSet:
       # -- List of ingress hosts
       ## Hostnames must be provided if Ingress is enabled.
       ## Secrets must be manually created in the namespace
-      hosts: []
+      hosts:
+        []
         # - argocd-applicationset.example.com
 
       # -- List of ingress paths
@@ -2252,7 +2275,8 @@ applicationSet:
       # -- Ingress path type. One of `Exact`, `Prefix` or `ImplementationSpecific`
       pathType: Prefix
       # -- Additional ingress paths
-      extraPaths: []
+      extraPaths:
+        []
         # - path: /*
         #   backend:
         #     serviceName: ssl-redirect
@@ -2267,7 +2291,8 @@ applicationSet:
         #         name: use-annotation
 
       # -- Ingress TLS configuration
-      tls: []
+      tls:
+        []
         # - secretName: argocd-applicationset-tls
         #   hosts:
         #     - argocd-applicationset.example.com
@@ -2323,7 +2348,8 @@ notifications:
 
   # -- Define user-defined context
   ## For more information: https://argocd-notifications.readthedocs.io/en/stable/templates/#defining-user-defined-context
-  context: {}
+  context:
+    {}
     # region: east
     # environmentName: staging
 
@@ -2337,7 +2363,8 @@ notifications:
     # -- Generic key:value pairs to be inserted into the secret
     ## Can be used for templates, notification services etc. Some examples given below.
     ## For more information: https://argocd-notifications.readthedocs.io/en/stable/services/overview/
-    items: {}
+    items:
+      {}
       # slack-token:
       #   # For more information: https://argocd-notifications.readthedocs.io/en/stable/services/slack/
 
@@ -2348,7 +2375,7 @@ notifications:
 
       # email-username:
       # email-password:
-        # For more information: https://argocd-notifications.readthedocs.io/en/stable/services/email/
+      # For more information: https://argocd-notifications.readthedocs.io/en/stable/services/email/
 
   # -- Application controller log format. Either `text` or `json`
   # @default -- `""` (defaults to global.logging.format)
@@ -2365,19 +2392,22 @@ notifications:
 
   # -- envFrom to pass to the controller
   # @default -- `[]` (See [values.yaml])
-  extraEnvFrom: []
+  extraEnvFrom:
+    []
     # - configMapRef:
     #     name: config-map-name
     # - secretRef:
     #     name: secret-name
 
   # -- List of extra mounts to add (normally used with extraVolumes)
-  extraVolumeMounts: []
+  extraVolumeMounts:
+    []
     # - mountPath: /tmp/foobar
     #   name: foobar
 
   # -- List of extra volumes to add
-  extraVolumes: []
+  extraVolumes:
+    []
     # - name: foobar
     #   emptyDir: {}
 
@@ -2397,7 +2427,8 @@ notifications:
       # -- Enable a prometheus ServiceMonitor
       enabled: false
       # -- Prometheus ServiceMonitor selector
-      selector: {}
+      selector:
+        {}
         # prometheus: kube-prometheus
       # -- Prometheus ServiceMonitor labels
       additionalLabels: {}
@@ -2414,7 +2445,8 @@ notifications:
   # -- Configures notification services such as slack, email or custom webhook
   # @default -- See [values.yaml]
   ## For more information: https://argocd-notifications.readthedocs.io/en/stable/services/overview/
-  notifiers: {}
+  notifiers:
+    {}
     # service.slack: |
     #   token: $slack-token
 
@@ -2431,7 +2463,8 @@ notifications:
   priorityClassName: ""
 
   # -- Resource limits and requests for the controller
-  resources: {}
+  resources:
+    {}
     # limits:
     #   cpu: 100m
     #   memory: 128Mi
@@ -2458,7 +2491,8 @@ notifications:
 
   # -- Contains centrally managed global application subscriptions
   ## For more information: https://argocd-notifications.readthedocs.io/en/stable/subscriptions/
-  subscriptions: []
+  subscriptions:
+    []
     # # subscription for on-sync-status-unknown trigger notifications
     # - recipients:
     #   - slack:test2
@@ -2474,7 +2508,8 @@ notifications:
 
   # -- The notification template is used to generate the notification content
   ## For more information: https://argocd-notifications.readthedocs.io/en/stable/templates/
-  templates: {}
+  templates:
+    {}
     # template.app-deployed: |
     #   email:
     #     subject: New version of an application {{.app.metadata.name}} is up and running.
@@ -2694,7 +2729,8 @@ notifications:
 
   # -- The trigger defines the condition when the notification should be sent
   ## For more information: https://argocd-notifications.readthedocs.io/en/stable/triggers/
-  triggers: {}
+  triggers:
+    {}
     # trigger.on-deployed: |
     #   - description: Application is synced and healthy. Triggered once per commit.
     #     oncePer: app.status.sync.revision
