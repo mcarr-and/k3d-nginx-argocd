@@ -2,6 +2,14 @@
 
 ## 0. Prerequisite - make /etc/hosts changes 
 
+### 0.1 install skaffold
+
+```bash
+brew install skaffold
+```
+
+### 0.2 /etc/hosts changes
+
 Add the `argocd.localhost` entry so you have a url to hit inside the K3D cluster. 
 
 ```
