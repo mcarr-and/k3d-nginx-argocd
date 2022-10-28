@@ -1,21 +1,8 @@
 # Quickstart
 
-1) Create Cluster
-    ```bash
-    make cluster
-    ```
+## 0. Prerequisite - make /etc/hosts changes 
 
-2) Deploy nginx, argo and dashbaord
-    ```bash
-    make run
-    ``` 
-
-3) vist argo
-    ```http://argocd.localhost:8080/```
-
-## /etc/hosts
-
-add the `argocd.local` entry so you have a url to hit inside the K3D cluster. 
+Add the `argocd.localhost` entry so you have a url to hit inside the K3D cluster. 
 
 ```
 ##
@@ -28,3 +15,25 @@ add the `argocd.local` entry so you have a url to hit inside the K3D cluster.
 127.0.0.1	localhost argocd.localhost
 
 ::1             localhost
+```
+
+## 1. Create Cluster
+
+    ```bash
+    make cluster
+    ```
+
+## 2. Deploy nginx, argo and dashbaord
+
+    ```bash
+    make run
+    ``` 
+
+## 3. Visit argo
+
+http://argocd.localhost:8080/
+
+
+### (Optional) Visit Kubernetes Dashboard
+
+http://localhost:4505/
